@@ -7,8 +7,8 @@ import { useFunctionLibrary } from "./functionLibrary/functions";
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
-  history: string[];
-  setHistory: Dispatch<SetStateAction<string[]>>;
+  history: String[][][];
+  setHistory: Dispatch<SetStateAction<String[][][]>>;
 }
 // You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
 // REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
@@ -53,11 +53,18 @@ export function REPLInput(props: REPLInputProps) {
 
     // functionMap[tokens[0]](tokens); // calling relevant function
     functionMap = useFunctionLibrary();
-    functionMap[tokens[0]](tokens);
+    let resultStrings: String[][] = [];
+
+    if (functionMap[tokens[0]](tokens) instanceof String) {
+      // when returns String
+    } else if (Array.isArray(functionMap[tokens[0]](tokens))) {
+      // when returns String[][]
+      resultStrings = functionMap[tokens[0]](tokens); // calling relevant function
+    }
 
     // if verbose add commandString to resultStrings.addFirst(0)
-    // props.setHistory([...props.history, resultStrings]);
-    // setCommandString("");
+    props.setHistory([...props.history, resultStrings]);
+    setCommandString("");
   }
   return (
     <div className="repl-input">

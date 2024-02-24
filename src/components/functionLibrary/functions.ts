@@ -3,7 +3,7 @@ import { REPLFunction } from "./REPLFunction";
 import { mockedPresidentData } from "../../data/us-presidents";
 
 type FileToDataMap = {
-  [key: string]: string[];
+  [key: string]: string[][];
 };
 
 const fileToData: FileToDataMap = {
@@ -11,7 +11,7 @@ const fileToData: FileToDataMap = {
 };
 
 export function useFunctionLibrary() {
-  const [currData, setCurrData] = useState<string[]>([]); // state variable to hold currently loaded dataset
+  let currData: string[][];
 
   const sampleFunction: REPLFunction = (
     args: Array<string>
@@ -20,10 +20,11 @@ export function useFunctionLibrary() {
     return "";
   };
 
-  const load: REPLFunction = (args: Array<string>): String | String[][] => {
+  const load: REPLFunction = (args: Array<string>): String => {
     // get data from filename
     // set state variable currData to be data
-    setCurrData(fileToData[args[1]]);
+    currData = fileToData[args[1]];
+    console.log(currData);
     return "Succesfully loaded!";
   };
 
