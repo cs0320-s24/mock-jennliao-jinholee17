@@ -6,4 +6,6 @@ const mockedPresidentData = [
   ["Ronald", "Reagan", "Nancy Reagan", "1976"],
 ];
 
-export { mockedPresidentData };
+const mockedDataResults = [["Jinho", "Lee", "Thomas Doeppner", "2016"]];
+
+export { mockedPresidentData, mockedDataResults };

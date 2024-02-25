@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { REPLFunction } from "./REPLFunction";
-import { mockedPresidentData } from "../../data/us-presidents";
+import {
+  mockedDataResults,
+  mockedPresidentData,
+} from "../../data/us-presidents";
 
 let currData: String[][];
 let verbose: Boolean = false;
@@ -11,6 +14,7 @@ type FileToDataMap = {
 
 const fileToData: FileToDataMap = {
   "data/presidents.csv": mockedPresidentData,
+  "0 Jinho": mockedDataResults,
 };
 
 export function useFunctionLibrary() {
@@ -47,11 +51,17 @@ export function useFunctionLibrary() {
     }
     return "No data loaded";
   };
+  const search: REPLFunction = (args: Array<string>): String[][] | String => {
+    if (verbose) {
+      return args[0] + " " + fileToData[args[1] + " " + args[2]];
+    }
+    return fileToData[args[1] + " " + args[2]];
+  };
 
   const mode: REPLFunction = (args: Array<string>): String => {
     verbose = !verbose;
     return "Verbose mode changed to " + verbose;
   };
 
-  return { sampleFunction, load, mode, view };
+  return { sampleFunction, load, mode, view, search };
 }
