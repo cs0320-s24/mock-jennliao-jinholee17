@@ -2,6 +2,8 @@ import { useState } from "react";
 import { REPLFunction } from "./REPLFunction";
 import { mockedPresidentData } from "../../data/us-presidents";
 
+let currData: string[][];
+
 type FileToDataMap = {
   [key: string]: string[][];
 };
@@ -11,8 +13,6 @@ const fileToData: FileToDataMap = {
 };
 
 export function useFunctionLibrary() {
-  let currData: string[][];
-
   const sampleFunction: REPLFunction = (
     args: Array<string>
   ): String | String[][] => {

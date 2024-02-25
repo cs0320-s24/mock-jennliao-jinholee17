@@ -48,18 +48,20 @@ export function REPLInput(props: REPLInputProps) {
     let tokens: string[] = []; // create tokens array
     tokens = commandString.split(" ");
 
-    setupCommands();
+    // setupCommands();
     let functionMap: StringToFunctionMap = setupCommands();
 
     // functionMap[tokens[0]](tokens); // calling relevant function
     functionMap = useFunctionLibrary();
-    let resultStrings: String[][] = [];
+    let resultStrings: String[][] = [[]];
+    const result = functionMap[tokens[0]](tokens);
 
-    if (functionMap[tokens[0]](tokens) instanceof String) {
+    if (typeof result === "string") {
       // when returns String
-    } else if (Array.isArray(functionMap[tokens[0]](tokens))) {
+      resultStrings[0].push(result);
+    } else if (Array.isArray(result)) {
       // when returns String[][]
-      resultStrings = functionMap[tokens[0]](tokens); // calling relevant function
+      resultStrings = result; // calling relevant function
     }
 
     // if verbose add commandString to resultStrings.addFirst(0)
