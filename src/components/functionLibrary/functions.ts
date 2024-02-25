@@ -2,7 +2,8 @@ import { useState } from "react";
 import { REPLFunction } from "./REPLFunction";
 import { mockedPresidentData } from "../../data/us-presidents";
 
-let currData: string[][];
+let currData: String[][];
+let verbose: Boolean = false;
 
 type FileToDataMap = {
   [key: string]: string[][];
@@ -25,8 +26,32 @@ export function useFunctionLibrary() {
     // set state variable currData to be data
     currData = fileToData[args[1]];
     console.log(currData);
+    if (verbose) {
+      return args[0] + " " + args[1] + " \n" + "Successfully loaded!";
+    }
     return "Succesfully loaded!";
   };
 
-  return { sampleFunction, load };
+  const view: REPLFunction = (args: Array<string>): String[][] | String => {
+    let result: String[][] = [[]];
+    if (verbose) {
+      result[0].push(args[0] + " " + currData);
+      return result;
+    }
+    if (currData != null) {
+      // result.push(currData);
+      return currData;
+    }
+    if (verbose) {
+      return args[0] + " No data loaded";
+    }
+    return "No data loaded";
+  };
+
+  const mode: REPLFunction = (args: Array<string>): String => {
+    verbose = !verbose;
+    return "Verbose mode changed to " + verbose;
+  };
+
+  return { sampleFunction, load, mode, view };
 }

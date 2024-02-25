@@ -15,7 +15,7 @@ import { REPLFunction } from "./functionLibrary/REPLFunction";
 
 export default function REPL() {
   // TODO: Add some kind of shared state that holds all the commands submitted.
-  const [history, setHistory] = useState<string[]>([]);
+  const [history, setHistory] = useState<String[][][]>([]);
 
   return (
     <div className="repl">
