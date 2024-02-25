@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { REPLFunction } from "./REPLFunction";
-import {
-  mockedDataResults,
-  mockedPresidentData,
-} from "../../data/us-presidents";
+import { mockedDataResults, mockedPresidentData } from "../../data/mocked-data";
 
 let currData: String[][];
 let verbose: Boolean = false;
