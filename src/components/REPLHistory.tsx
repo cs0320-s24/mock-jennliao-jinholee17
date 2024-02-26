@@ -12,12 +12,18 @@ export function REPLHistory(props: REPLHistoryProps) {
 
       {props.history.map((result) => (
         // make a table for each result
-        <table>
+        <table className="repl-table" aria-label="repl-table">
           {result.map((row) => (
             // make a row for each list in the result
-            <tr>
+            <tr className="repl-row" aria-label="repl-row">
               {row.map((element) => (
-                <td> {element} </td>
+                <td
+                  className="repl-element"
+                  // colSpan={row[0][1].length === 1 ? row.length : 1}
+                >
+                  {" "}
+                  {element}{" "}
+                </td>
               ))}
             </tr>
           ))}
