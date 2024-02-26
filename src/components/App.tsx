@@ -12,7 +12,14 @@ function App() {
   return (
     <div className="App">
       <p className="App-header">
-        <h1>Mock</h1>
+        <span>
+          <h1 className="title">Mock</h1>
+        </span>
+        <img
+          src="src/coquette.png"
+          className="pink-bow"
+          aria-label="pink-bow"
+        />
         <LoginButton isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       </p>
 
