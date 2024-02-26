@@ -15,7 +15,11 @@ export function REPLHistory(props: REPLHistoryProps) {
         <table>
           {result.map((row) => (
             // make a row for each list in the result
-            <tr> {row} </tr> // this line is definitely not correct but its okay
+            <tr>
+              {row.map((element) => (
+                <td> {element} </td>
+              ))}
+            </tr>
           ))}
         </table>
       ))}
