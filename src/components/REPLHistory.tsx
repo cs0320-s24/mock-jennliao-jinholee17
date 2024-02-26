@@ -11,9 +11,11 @@ export function REPLHistory(props: REPLHistoryProps) {
       {/* TODO: To go through all the pushed commands... try the .map() function! */}
 
       {props.history.map((result) => (
+        // make a table for each result
         <table>
           {result.map((row) => (
-            <tr></tr>
+            // make a row for each list in the result
+            <tr> {row} </tr> // this line is definitely not correct but its okay
           ))}
         </table>
       ))}
