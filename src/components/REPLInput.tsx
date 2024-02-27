@@ -45,8 +45,7 @@ export function REPLInput(props: REPLInputProps) {
     setCount(count + 1);
 
     // parsing commandString:
-    let tokens: string[] = []; // create tokens array
-    tokens = commandString.split(" ");
+    const tokens = commandString.match(/(?:[^\s"]+|"[^"]*")/g);
 
     // setupCommands();
     let functionMap: StringToFunctionMap = setupCommands();
@@ -54,23 +53,26 @@ export function REPLInput(props: REPLInputProps) {
     functionMap = useFunctionLibrary();
     let resultStrings: String[][] = [[]];
 
-    if (typeof functionMap[tokens[0]] !== "function") {
-      resultStrings[0].push("Invalid command");
-    } else {
-      const result = functionMap[tokens[0]](tokens);
-      if (result == null) {
-        // unsure if we need this / if this ever happens
+    if (tokens != null) {
+      if (typeof functionMap[tokens[0]] !== "function") {
         resultStrings[0].push("Invalid command");
-      }
+      } else {
+        const result = functionMap[tokens[0]](tokens);
+        if (result == null) {
+          // unsure if we need this / if this ever happens
+          resultStrings[0].push("Invalid command");
+        }
 
-      if (typeof result === "string") {
-        // when returns String
-        resultStrings[0].push(result);
-      } else if (Array.isArray(result)) {
-        // when returns String[][]
-        resultStrings = result; // calling relevant function
+        if (typeof result === "string") {
+          // when returns String
+          resultStrings[0].push(result);
+        } else if (Array.isArray(result)) {
+          // when returns String[][]
+          resultStrings = result; // calling relevant function
+        }
       }
     }
+
     // if verbose add commandString to resultStrings.addFirst(0)
     props.setHistory([...props.history, resultStrings]);
     setCommandString("");

@@ -1,8 +1,16 @@
 import { useState } from "react";
 import { REPLFunction } from "./REPLFunction";
-import { mockedDataResults, mockedPresidentData } from "../../data/mocked-data";
+import {
+  mockedDataResults,
+  mockedMetGalaGuests,
+  mockedPresidentData,
+  mockedMetResults,
+  mockedAlejandroMetResults,
+} from "../../data/mocked-data";
 
 let currData: String[][];
+let mockedHeader: Boolean = false;
+
 let verbose: Boolean = false;
 
 type FileToDataMap = {
@@ -11,7 +19,13 @@ type FileToDataMap = {
 
 const fileToData: FileToDataMap = {
   "data/presidents.csv": mockedPresidentData,
+  "data/met-gala.csv": mockedMetGalaGuests,
+};
+
+const searchToData: FileToDataMap = {
   "0 Jinho": mockedDataResults,
+  "theme Camp": mockedMetResults,
+  'designer "Saint Laurent"': mockedAlejandroMetResults,
 };
 
 export function useFunctionLibrary() {
@@ -28,7 +42,9 @@ export function useFunctionLibrary() {
 
     if (args[1] == null) {
       return "Please input a file.";
-    } else if (args[2] != null) {
+    } else if (args[2] == null) {
+      return "Please indicate if the file has a header.";
+    } else if (args[3] != null) {
       return "Too many arguments.";
     }
 
@@ -37,6 +53,15 @@ export function useFunctionLibrary() {
     }
 
     currData = fileToData[args[1]];
+
+    if (args[2] === "true") {
+      mockedHeader = true;
+    } else if (args[2] === "false") {
+      mockedHeader = false;
+    } else {
+      return "Invalid header indication.";
+    }
+
     console.log(currData);
     if (verbose) {
       return [[args[0] + " " + args[1]], ["Successfully loaded!"]];
@@ -72,13 +97,14 @@ export function useFunctionLibrary() {
   };
 
   const search: REPLFunction = (args: Array<string>): String[][] | String => {
+    console.log(args);
     // check for additional inputs
     if (args[3] != null) {
       return "Too many arguments";
     }
 
     if (currData != null) {
-      let result = fileToData[args[1] + " " + args[2]];
+      let result = searchToData[args[1] + " " + args[2]];
       if (result == null) {
         return "No results found";
       }

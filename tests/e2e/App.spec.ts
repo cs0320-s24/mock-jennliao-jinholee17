@@ -9,9 +9,8 @@ import { expect, test } from "@playwright/test";
  */
 
 // If you needed to do something before every test case...
-test.beforeEach(() => {
-  // ... you'd put it here.
-  // TODO: Is there something we need to do before every test case to avoid repeating code?np
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:8000/");
 });
 
 /**
@@ -22,13 +21,11 @@ test.beforeEach(() => {
  */
 test("on page load, i see a login button", async ({ page }) => {
   // Notice: http, not https! Our front-end is not set up for HTTPs.
-  await page.goto("http://localhost:8000/");
   await expect(page.getByLabel("Login")).toBeVisible();
 });
 
 test("on page load, i dont see the input box until login", async ({ page }) => {
   // Notice: http, not https! Our front-end is not set up for HTTPs.
-  await page.goto("http://localhost:8000/");
   await expect(page.getByLabel("Sign Out")).not.toBeVisible();
   await expect(page.getByLabel("Command input")).not.toBeVisible();
 
@@ -40,7 +37,6 @@ test("on page load, i dont see the input box until login", async ({ page }) => {
 
 test("after I type into the input box, its text changes", async ({ page }) => {
   // Step 1: Navigate to a URL
-  await page.goto("http://localhost:8000/");
   await page.getByLabel("Login").click();
 
   // Step 2: Interact with the page
@@ -56,14 +52,12 @@ test("after I type into the input box, its text changes", async ({ page }) => {
 
 test("on page load, i see a button", async ({ page }) => {
   // TODO WITH TA: Fill this in!
-  await page.goto("http://localhost:8000/");
   await page.getByLabel("Login").click();
   await expect(page.getByLabel("Submit")).toBeVisible();
 });
 
 test("after I click the button, its label increments", async ({ page }) => {
   // TODO WITH TA: Fill this in to test your button counter functionality!
-  await page.goto("http://localhost:8000/");
   await page.getByLabel("Login").click();
   await page.getByLabel("Submit").click();
   await page.getByLabel("Submit").click();
@@ -72,7 +66,6 @@ test("after I click the button, its label increments", async ({ page }) => {
 
 test("after I click the button, my command gets pushed", async ({ page }) => {
   // TODO: Fill this in to test your button push functionality!
-  await page.goto("http://localhost:8000/");
   await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
   await page.getByLabel("Command input").fill("Awesome command");
