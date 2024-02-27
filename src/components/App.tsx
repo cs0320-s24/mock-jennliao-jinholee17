@@ -13,7 +13,7 @@ function App() {
     <div className="App">
       <p className="App-header">
         <span>
-          <h1 className="title">Mock</h1>
+          <h1 className="title">Moquette</h1>
         </span>
         <img
           src="src/coquette.png"

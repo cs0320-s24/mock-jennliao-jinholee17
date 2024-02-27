@@ -46,32 +46,63 @@ export function useFunctionLibrary() {
 
   const view: REPLFunction = (args: Array<string>): String[][] | String => {
     let result: String[][] = [[]];
+
+    // checking extra inputs
+    if (args[1] != null) {
+      return "Too many arguments";
+    }
+
     if (verbose) {
-      result[0] = [args[0]];
-      result = result.concat(currData);
-      //   result[0].push(args[0] + " " + currData);
-      console.log(result);
-      return result;
-    } else {
+      // if we are in verbose mode
       if (currData != null) {
-        // result.push(currData);
-        return currData;
-      }
-      if (verbose) {
+        result[0] = [args[0]];
+        result = result.concat(currData);
+        console.log(result);
+        return result;
+      } else {
         return [[args[0]], [" No data loaded"]];
+      }
+    } else {
+      // if we are in brief mode
+      if (currData != null) {
+        return currData;
       }
       return "No data loaded";
     }
   };
 
   const search: REPLFunction = (args: Array<string>): String[][] | String => {
-    if (verbose) {
-      let returnList: String[][] = [[args[0] + " " + args[1] + " " + args[2]]];
-      returnList = returnList.concat(fileToData[args[1] + " " + args[2]]);
-      console.log(returnList);
-      return returnList;
+    // check for additional inputs
+    if (args[3] != null) {
+      return "Too many arguments";
     }
-    return fileToData[args[1] + " " + args[2]];
+
+    if (currData != null) {
+      let result = fileToData[args[1] + " " + args[2]];
+      if (result == null) {
+        return "No results found";
+      }
+      if (verbose) {
+        let returnList: String[][] = [
+          [args[0] + " " + args[1] + " " + args[2]],
+        ];
+        returnList = returnList.concat(result);
+        console.log(returnList);
+        return returnList;
+      }
+      return result;
+    } else {
+      // no file loaded
+      if (verbose) {
+        let returnList: String[][] = [
+          [args[0] + " " + args[1] + " " + args[2]],
+        ];
+        returnList = returnList.concat([["No data loaded"]]);
+        return returnList;
+      } else {
+        return "No data loaded";
+      }
+    }
   };
 
   const mode: REPLFunction = (args: Array<string>): String => {

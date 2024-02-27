@@ -51,19 +51,26 @@ export function REPLInput(props: REPLInputProps) {
     // setupCommands();
     let functionMap: StringToFunctionMap = setupCommands();
 
-    // functionMap[tokens[0]](tokens); // calling relevant function
     functionMap = useFunctionLibrary();
     let resultStrings: String[][] = [[]];
-    const result = functionMap[tokens[0]](tokens);
 
-    if (typeof result === "string") {
-      // when returns String
-      resultStrings[0].push(result);
-    } else if (Array.isArray(result)) {
-      // when returns String[][]
-      resultStrings = result; // calling relevant function
+    if (typeof functionMap[tokens[0]] !== "function") {
+      resultStrings[0].push("Invalid command");
+    } else {
+      const result = functionMap[tokens[0]](tokens);
+      if (result == null) {
+        // unsure if we need this / if this ever happens
+        resultStrings[0].push("Invalid command");
+      }
+
+      if (typeof result === "string") {
+        // when returns String
+        resultStrings[0].push(result);
+      } else if (Array.isArray(result)) {
+        // when returns String[][]
+        resultStrings = result; // calling relevant function
+      }
     }
-
     // if verbose add commandString to resultStrings.addFirst(0)
     props.setHistory([...props.history, resultStrings]);
     setCommandString("");
