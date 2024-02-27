@@ -16,12 +16,25 @@
 }
 .title {
   text-align: center;
-  margin-right: 10px;
+  margin-left: 500px;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: 0px;
   align-self: center;
 }
 .pink-bow {
-  height: 10%;
-  width: 10%;
+  height: 7%;
+  width: 7%;
   margin-left: 10px;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
   align-self: center;
+}
+
+.logInButton {
+  margin-left: 0px;
+  margin-right: 400px;
+  align-self: center;
+  display: block;
 }

@@ -53,8 +53,8 @@
   margin: auto;
   display: block;
 }
-
-button {
+.submitButton {
   margin: auto;
+  margin-top: 5px;
   display: block;
 }
