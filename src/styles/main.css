@@ -17,6 +17,7 @@
 }
 
 .repl-table {
+  font-family: "Dancing Script";
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -26,6 +27,7 @@
 }
 
 .repl-row {
+  font-family: "Dancing Script";
   border: 2px solid #dddddd;
   padding: 8px;
   border-radius: 3px;
@@ -33,6 +35,7 @@
   border-color: #dddddd;
 }
 .repl-element {
+  font-family: "Dancing Script";
   border: 2px solid #dddddd;
   padding: 8px;
   border-radius: 3px;
@@ -40,10 +43,12 @@
 }
 
 .repl-input {
+  font-family: "Dancing Script";
   margin: auto;
   height: 10vh;
 }
 .repl-command-box {
+  font-family: "Dancing Script";
   width: 90%;
   margin: auto;
   display: block;
