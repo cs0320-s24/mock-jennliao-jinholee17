@@ -66,7 +66,7 @@ export function useFunctionLibrary() {
     if (verbose) {
       return [[args[0] + " " + args[1]], ["Successfully loaded!"]];
     }
-    return "Succesfully loaded!";
+    return "Successfully loaded!";
   };
 
   const view: REPLFunction = (args: Array<string>): String[][] | String => {
@@ -101,6 +101,9 @@ export function useFunctionLibrary() {
     // check for additional inputs
     if (args[3] != null) {
       return "Too many arguments";
+    }
+    if (args[1] == null || args[2] == null) {
+      return "Not enough arguments";
     }
 
     if (currData != null) {
