@@ -44,6 +44,19 @@ test("I load a valid file, I search valid data", async ({ page }) => {
   await expect(page.getByText("2016")).toBeVisible();
 });
 
+test("I load an invalid file, search returns error", async ({ page }) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/jennifer.csv true");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("File not found")).toBeVisible();
+
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("search 0 Jinho");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("No data loaded")).toBeVisible();
+});
+
 test("I load a valid file, I search with too many arguments", async ({
   page,
 }) => {
@@ -96,7 +109,7 @@ test("I load a valid file, I search with a column number w/ header, I search wit
   await expect(page.getByText("Kloss")).toBeVisible();
   await expect(page.getByText("Gucci")).toBeVisible();
 
-  // await page.getByLabel("Login").click();
+  await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
   await page.getByLabel("Command input").fill("load data/presidents.csv false");
   await page.getByLabel("Submit").click();
