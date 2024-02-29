@@ -49,10 +49,13 @@ const mockedAlejandroMetResults = [
 
 const mockedPresidentsResults = [["Jinho", "Lee", "Thomas Doeppner", "2016"]];
 
+const mockedEmptyData = [[]];
+
 export {
   mockedPresidentData,
   mockedPresidentsResults as mockedDataResults,
   mockedMetGalaGuests,
   mockedMetResults,
   mockedAlejandroMetResults,
+  mockedEmptyData,
 };

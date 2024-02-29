@@ -19,6 +19,7 @@ export function REPLHistory(props: REPLHistoryProps) {
               {row.map((element) => (
                 <td
                   className="repl-element"
+                  aria-label="repl-element"
                   // colSpan={row[0][1].length === 1 ? row.length : 1}
                 >
                   {" "}

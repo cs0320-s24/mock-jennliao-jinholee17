@@ -25,6 +25,14 @@ test("successful load prints a message without headers", async ({ page }) => {
   await expect(page.getByText("Successfully loaded!")).toBeVisible();
 });
 
+test("successfully loads empty file", async ({ page }) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/empty-file.csv false");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("Successfully loaded!")).toBeVisible();
+});
+
 test("load requires a file to be inputted", async ({ page }) => {
   await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
@@ -77,8 +85,6 @@ test("load prints a message if header is not true or false", async ({
 
 /* View Tests!! */
 
-//TODO: test basic successful case
-
 test("view with loaded file is displays data", async ({ page }) => {
   await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
@@ -92,19 +98,36 @@ test("view with loaded file is displays data", async ({ page }) => {
   await expect(page.getByText("2016")).toBeVisible();
 
   await expect(page.getByText("George")).toBeVisible();
-  //await expect(page.getByText("Washington")).toBeVisible(); for some reason this is causing an error
-  await expect(page.getByText("Martha Washington")).toBeVisible();
+  //   await expect(page.getByText(/^Washington$/)).toBeVisible(); // for some reason this is causing an error
+  //   await expect(page.getByText(/^Martha Washington$/)).toBeVisible();
   await expect(page.getByText("1789")).toBeVisible();
 
-  await expect(page.getByText("Thomas")).toBeVisible();
-  await expect(page.getByText("Jefferson")).toBeVisible();
+  await expect(
+    page.getByLabel("repl-element").getByText(/^\s*Washington\s*$/i)
+  ).toBeVisible();
+  await expect(
+    page.getByLabel("repl-element").getByText(/^\s*Martha Washington\s*$/i)
+  ).toBeVisible();
+
+  await expect(page.getByText(/^\s*Thomas\s*$/i)).toBeVisible();
+  await expect(page.getByText(/^\s*Jefferson\s*$/i)).toBeVisible();
   await expect(page.getByText("Ben Franklin")).toBeVisible();
   await expect(page.getByText("2024")).toBeVisible();
 
   await expect(page.getByText("Ronald")).toBeVisible();
-  //await expect(page.getByText("Reagan")).toBeVisible();
-  await expect(page.getByText("Nancy Reagan")).toBeVisible();
+  await expect(page.getByText(/^\s*Reagan\s*$/i)).toBeVisible();
+  await expect(page.getByText(/^\s*Nancy Reagan\s*$/i)).toBeVisible();
   await expect(page.getByText("1976")).toBeVisible();
+});
+
+test("view with loaded empty file is displays message", async ({ page }) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/empty-file.csv false");
+  await page.getByLabel("Submit").click();
+  await page.getByLabel("Command input").fill("view");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("Loaded CSV file is empty")).toBeVisible();
 });
 
 test("view when no file is loaded prints a message", async ({ page }) => {

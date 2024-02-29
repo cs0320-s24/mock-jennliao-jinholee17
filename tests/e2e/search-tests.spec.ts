@@ -91,16 +91,16 @@ test("I load a valid file, I search with a column number w/ header, I search wit
   // await expect(page.getByText("Tim")).toBeVisible();
   await expect(page.getByText("Nelson")).toBeVisible();
   await expect(page.getByText("Vivienne Westwood")).toBeVisible();
-  await expect(page.getByText("Slay")).toBeVisible();
+  await expect(page.getByText(/^\s*slay\s*$/i).first()).toBeVisible();
   await expect(page.getByText("Karlie")).toBeVisible();
   await expect(page.getByText("Kloss")).toBeVisible();
   await expect(page.getByText("Gucci")).toBeVisible();
 
-  await page.getByLabel("Login").click();
+  // await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
   await page.getByLabel("Command input").fill("load data/presidents.csv false");
   await page.getByLabel("Submit").click();
-  await expect(page.getByText("Successfully loaded!")).toBeVisible();
+  await expect(page.getByText("Successfully loaded!").last()).toBeVisible();
 
   await page.getByLabel("Command input").click();
   await page.getByLabel("Command input").fill("search 0 Jinho");

@@ -6,6 +6,7 @@ import {
   mockedPresidentData,
   mockedMetResults,
   mockedAlejandroMetResults,
+  mockedEmptyData,
 } from "../../data/mocked-data";
 
 let currData: String[][];
@@ -20,6 +21,7 @@ type FileToDataMap = {
 const fileToData: FileToDataMap = {
   "data/presidents.csv": mockedPresidentData,
   "data/met-gala.csv": mockedMetGalaGuests,
+  "data/empty-file.csv": mockedEmptyData,
 };
 
 const searchToData: FileToDataMap = {
@@ -81,7 +83,12 @@ export function useFunctionLibrary() {
       // if we are in verbose mode
       if (currData != null) {
         result[0] = [args[0]];
-        result = result.concat(currData);
+
+        if (currData[0].length == 0) {
+          result = result.concat([["Loaded CSV file is empty"]]);
+        } else {
+          result = result.concat(currData);
+        }
         console.log(result);
         return result;
       } else {
@@ -90,7 +97,11 @@ export function useFunctionLibrary() {
     } else {
       // if we are in brief mode
       if (currData != null) {
-        return currData;
+        if (currData[0].length == 0) {
+          return "Loaded CSV file is empty";
+        } else {
+          return currData;
+        }
       }
       return "No data loaded";
     }
