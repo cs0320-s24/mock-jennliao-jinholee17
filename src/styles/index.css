@@ -1,3 +1,7 @@
+/**
+CSS class for general styling in the program for things like buttons.
+*/
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -37,10 +41,11 @@ button {
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: 0.4s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: rgb(255, 255, 255);
+  background-color: pink;
 }
 button:focus,
 button:focus-visible {

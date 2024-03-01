@@ -1,4 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+
+/**
+CSS file for the app class. Handles styling for header, header images, and login button.
+*/
+
 .App {
   /* text-align: center; */
 }

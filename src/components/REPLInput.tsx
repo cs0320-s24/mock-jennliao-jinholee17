@@ -2,16 +2,22 @@ import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { REPLFunction } from "./functionLibrary/REPLFunction";
-import { sampleFunction } from "./functionLibrary/sampleFunction";
 import { useFunctionLibrary } from "./functionLibrary/functions";
 
+/**
+ * Fields to keep track of the history
+ */
 interface REPLInputProps {
-  // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
   history: String[][][];
   setHistory: Dispatch<SetStateAction<String[][][]>>;
 }
-// You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
-// REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
+
+/**
+ * Function that handles function calls inside the repl, and
+ * updates the state
+ * @param props
+ * @returns
+ */
 export function REPLInput(props: REPLInputProps) {
   // Remember: let React manage state in your webapp.
   // Manages the contents of the input box
@@ -23,31 +29,23 @@ export function REPLInput(props: REPLInputProps) {
   };
 
   /**
-   * We suggest breaking down this component into smaller components, think about the individual pieces
-   * of the REPL and how they connect to each other...
+   * Creates a function map of strings to function calls
    */
   function setupCommands() {
     const functionMap: StringToFunctionMap = {};
-
-    // Add functions to the map
-    // functionMap["view"] = () => {};
-
-    // functionMap["load"] = () => {};
-
-    // functionMap["search"] = () => {};
-    // functionMap["mode"] = () => {};
-
-    functionMap["sample"] = sampleFunction;
-
     return functionMap;
   }
+  /**
+   * Fills the function map of commands, parses
+   * user input for a command. Updates history. Handles submit button.
+   * @param commandString
+   */
   function handleSubmit(commandString: string) {
     setCount(count + 1);
 
     // parsing commandString:
     const tokens = commandString.match(/(?:[^\s"]+|"[^"]*")/g);
 
-    // setupCommands();
     let functionMap: StringToFunctionMap = setupCommands();
 
     functionMap = useFunctionLibrary();

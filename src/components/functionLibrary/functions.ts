@@ -30,7 +30,23 @@ const searchToData: FileToDataMap = {
   'designer "Saint Laurent"': mockedAlejandroMetResults,
 };
 
+/**
+ * This is our function which defines every function that you can input into
+ * the REPL. These include load, view, search, and mode. This 'library' is super
+ * abstract in how we use it, so a developer could easily add more commands to this
+ * library if they wanted to, and it would automatically work in the higher levels of the
+ * design.
+ * @returns the functions, so that they can be used in a different  class.
+ */
 export function useFunctionLibrary() {
+  /**
+   * sampleFunction to show the flexibility of our design in terms of adding new methods. A
+   * developer could easily define their own method and add it to this list if they wanted
+   * it to be functional in the repl, and then the repl would automatically work with it the
+   * way we have abstracted it.
+   * @param args
+   * @returns empty string
+   */
   const sampleFunction: REPLFunction = (
     args: Array<string>
   ): String | String[][] => {
@@ -38,6 +54,11 @@ export function useFunctionLibrary() {
     return "";
   };
 
+  /**
+   *  Loads a file into the CSV
+   * @param args: arg[1] = file name
+   * @returns different strings based on correct/incorrect input
+   */
   const load: REPLFunction = (args: Array<string>): String | String[][] => {
     // get data from filename
     // set state variable currData to be data
@@ -105,6 +126,11 @@ export function useFunctionLibrary() {
     return "Successfully loaded!";
   };
 
+  /**
+   * Returns a file in a double list of strings format, if it is loaded
+   * @param args: arg[0] = 'view', everything else should be empty
+   * @returns the currently loaded data
+   */
   const view: REPLFunction = (args: Array<string>): String[][] | String => {
     let result: String[][] = [[]];
 
@@ -141,6 +167,11 @@ export function useFunctionLibrary() {
     }
   };
 
+  /**
+   * Searches a CSV file for a given value based on header value or column index
+   * @param args arg[1] = column identifier, arg[2] = value to search
+   * @returns the row(s) that contain the value
+   */
   const search: REPLFunction = (args: Array<string>): String[][] | String => {
     console.log(args);
     // check for additional inputs
@@ -179,6 +210,12 @@ export function useFunctionLibrary() {
     }
   };
 
+  /**
+   * Switches the repl history to verbose or brief, which either shows
+   * the command in history or not.
+   * @param args
+   * @returns
+   */
   const mode: REPLFunction = (args: Array<string>): String => {
     if (args[1] != null) {
       return "Incorrect number of arguments";

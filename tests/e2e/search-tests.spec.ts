@@ -146,3 +146,20 @@ test("I load an empty file, I search it", async ({ page }) => {
       .last()
   ).toBeVisible();
 });
+
+test("I load a file, I search with 2 word value name", async ({ page }) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/empty-file.csv false");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("Successfully loaded!")).toBeVisible();
+
+  await page.getByLabel("Command input").click();
+  await page
+    .getByLabel("Command input")
+    .fill('search designer "Saint Laurent"');
+  await page.getByLabel("Submit").click();
+
+  await expect(page.getByText("Alejandro")).toBeVisible();
+  await expect(page.getByText("Jackson")).toBeVisible();
+});

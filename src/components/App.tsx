@@ -4,7 +4,7 @@ import { LoginButton } from "./LoginButton";
 import REPL from "./REPL";
 
 /**
- * This is the highest level component!
+ * Our app class, connects the header, image, login button, repl
  */
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
