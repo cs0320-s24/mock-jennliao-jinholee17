@@ -7,7 +7,6 @@ import {
   mockedMetResults,
   mockedAlejandroMetResults,
   mockedEmptyData,
-  mockedInvalidHeader,
   mockedInvalidColumnIdentifier,
 } from "../../data/mocked-data";
 
