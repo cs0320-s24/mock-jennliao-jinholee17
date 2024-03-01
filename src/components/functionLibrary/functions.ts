@@ -43,15 +43,40 @@ export function useFunctionLibrary() {
     // set state variable currData to be data
 
     if (args[1] == null) {
-      return "Please input a file.";
+      if (verbose) {
+        return [
+          [args[0] + " " + args[1] + " " + args[2]],
+          ["Please input a file."],
+        ];
+      } else {
+        return "Please input a file.";
+      }
     } else if (args[2] == null) {
-      return "Please indicate if the file has a header.";
+      if (verbose) {
+        return [
+          [args[0] + " " + args[1] + " " + args[2]],
+          ["Please indicate if the file has a header."],
+        ];
+      } else {
+        return "Please indicate if the file has a header.";
+      }
     } else if (args[3] != null) {
-      return "Too many arguments.";
+      if (verbose) {
+        return [
+          [args[0] + " " + args[1] + " " + args[2]],
+          ["Too many arguments."],
+        ];
+      } else {
+        return "Too many arguments.";
+      }
     }
 
     if (fileToData[args[1]] == null) {
-      return "File not found";
+      if (verbose) {
+        return [[args[0] + " " + args[1] + " " + args[2]], ["File not found"]];
+      } else {
+        return "File not found";
+      }
     }
 
     currData = fileToData[args[1]];
@@ -61,12 +86,21 @@ export function useFunctionLibrary() {
     } else if (args[2] === "false") {
       mockedHeader = false;
     } else {
-      return "Invalid header indication.";
+      if (verbose) {
+        return [
+          [args[0] + " " + args[1] + " " + args[2]],
+          ["Invalid header indication."],
+        ];
+      } else {
+        return "Invalid header indication.";
+      }
     }
 
-    console.log(currData);
     if (verbose) {
-      return [[args[0] + " " + args[1]], ["Successfully loaded!"]];
+      return [
+        [args[0] + " " + args[1] + " " + args[2]],
+        ["Successfully loaded!"],
+      ];
     }
     return "Successfully loaded!";
   };
