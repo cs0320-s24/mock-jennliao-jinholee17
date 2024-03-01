@@ -101,7 +101,6 @@ test("I load a valid file, I search with a column number w/ header, I search wit
   await page.getByLabel("Submit").click();
 
   await page.keyboard.press("PageDown");
-  // await expect(page.getByText("Tim")).toBeVisible();
   await expect(page.getByText("Nelson")).toBeVisible();
   await expect(page.getByText("Vivienne Westwood")).toBeVisible();
   await expect(page.getByText(/^\s*slay\s*$/i).first()).toBeVisible();
@@ -109,7 +108,6 @@ test("I load a valid file, I search with a column number w/ header, I search wit
   await expect(page.getByText("Kloss")).toBeVisible();
   await expect(page.getByText("Gucci")).toBeVisible();
 
-  await page.getByLabel("Login").click();
   await page.getByLabel("Command input").click();
   await page.getByLabel("Command input").fill("load data/presidents.csv false");
   await page.getByLabel("Submit").click();
@@ -120,4 +118,31 @@ test("I load a valid file, I search with a column number w/ header, I search wit
   await page.getByLabel("Submit").click();
   await expect(page.getByText("Jinho")).toBeVisible();
   await expect(page.getByText("Lee")).toBeVisible();
+});
+
+test("I load an empty file, I search it", async ({ page }) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/empty-file.csv false");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("Successfully loaded!")).toBeVisible();
+
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("search star jennifer");
+  await page.getByLabel("Submit").click();
+
+  await expect(
+    page.getByLabel("repl-element").getByText(/^\s*No results found\s*$/i)
+  ).toBeVisible();
+
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("search 0 HELLO");
+  await page.getByLabel("Submit").click();
+
+  await expect(
+    page
+      .getByLabel("repl-element")
+      .getByText(/^\s*No results found\s*$/i)
+      .last()
+  ).toBeVisible();
 });
