@@ -7,6 +7,8 @@ import {
   mockedMetResults,
   mockedAlejandroMetResults,
   mockedEmptyData,
+  mockedInvalidHeader,
+  mockedInvalidColumnIdentifier,
 } from "../../data/mocked-data";
 
 let currData: String[][];
@@ -26,6 +28,7 @@ const fileToData: FileToDataMap = {
 
 const searchToData: FileToDataMap = {
   "0 Jinho": mockedDataResults,
+  "city Boston": mockedInvalidColumnIdentifier,
   "theme Camp": mockedMetResults,
   'designer "Saint Laurent"': mockedAlejandroMetResults,
 };

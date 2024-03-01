@@ -51,6 +51,8 @@ const mockedPresidentsResults = [["Jinho", "Lee", "Thomas Doeppner", "2016"]];
 
 const mockedEmptyData = [[]];
 
+const mockedInvalidColumnIdentifier = [["Column identifier doesn't exist"]];
+
 export {
   mockedPresidentData,
   mockedPresidentsResults as mockedDataResults,
@@ -58,4 +60,5 @@ export {
   mockedMetResults,
   mockedAlejandroMetResults,
   mockedEmptyData,
+  mockedInvalidColumnIdentifier,
 };

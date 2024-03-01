@@ -163,3 +163,19 @@ test("I load a file, I search with 2 word value name", async ({ page }) => {
   await expect(page.getByText("Alejandro")).toBeVisible();
   await expect(page.getByText("Jackson")).toBeVisible();
 });
+
+test("I load a file, I search with a non-existent column identifier", async ({
+  page,
+}) => {
+  await page.getByLabel("Login").click();
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill("load data/empty-file.csv false");
+  await page.getByLabel("Submit").click();
+  await expect(page.getByText("Successfully loaded!")).toBeVisible();
+
+  await page.getByLabel("Command input").click();
+  await page.getByLabel("Command input").fill('search city Boston"');
+  await page.getByLabel("Submit").click();
+
+  await expect(page.getByText("Column identifier doesn't exist")).toBeVisible();
+});
