@@ -19,6 +19,7 @@ function App() {
           src="src/coquette.png"
           className="pink-bow"
           aria-label="pink-bow"
+          alt-text="thin pink bow"
         />
         <LoginButton isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       </p>
