@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Parisienne&display=swap");
+
+/**
+CSS file for the app class. Handles styling for header, header images, and login button.
+*/
+
+.App {
+  /* text-align: center; */
+}
+
+.App-header {
+  background-color: hsl(330, 100%, 83%);
+  min-height: 8vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Parisienne";
+  font-size: calc(1px + 2vmin);
+  color: white;
+}
+.title {
+  text-align: center;
+  margin-left: 500px;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: 0px;
+  align-self: center;
+}
+.pink-bow {
+  height: 7%;
+  width: 7%;
+  margin-left: 10px;
+  margin-right: auto;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  align-self: center;
+}
+
+.logInButton {
+  margin-left: 0px;
+  margin-right: 400px;
+  align-self: center;
+  display: block;
+}
